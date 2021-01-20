@@ -1,7 +1,7 @@
 package cn.corbinhu.community.service;
 
 
-import cn.corbinhu.community.dao.DiscussPostMapper;
+import cn.corbinhu.community.mapper.DiscussPostMapper;
 import cn.corbinhu.community.entity.DiscussPost;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

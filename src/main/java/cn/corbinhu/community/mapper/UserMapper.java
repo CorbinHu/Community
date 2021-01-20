@@ -1,4 +1,4 @@
-package cn.corbinhu.community.dao;
+package cn.corbinhu.community.mapper;
 
 import cn.corbinhu.community.entity.User;
 import org.apache.ibatis.annotations.Mapper;
