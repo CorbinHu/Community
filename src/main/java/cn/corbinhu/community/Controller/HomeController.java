@@ -4,10 +4,13 @@ import cn.corbinhu.community.entity.DiscussPost;
 import cn.corbinhu.community.entity.Page;
 import cn.corbinhu.community.entity.User;
 import cn.corbinhu.community.service.DiscussPostService;
+import cn.corbinhu.community.service.LikeService;
 import cn.corbinhu.community.service.UserService;
+import cn.corbinhu.community.utils.CommunityConstant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -17,13 +20,16 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
-public class HomeController {
+public class HomeController implements CommunityConstant {
 
     @Autowired
     private DiscussPostService discussPostService;
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private LikeService likeService;
 
     @RequestMapping(path = "/index", method = RequestMethod.GET)
     public String getIndexPage(Model model, Page page) {
@@ -40,11 +46,19 @@ public class HomeController {
                 map.put("post", post);
                 User user = userService.findUserById(post.getUserId());
                 map.put("user", user);
+                // 点赞的数量
+                long linkCount = likeService.findEntityLikeCount(ENTITY_TYPE_POST, post.getId());
+                map.put("linkCount", linkCount);
                 discussPosts.add(map);
             }
         }
         model.addAttribute("discussPosts", discussPosts);
         return "/index";
+    }
+
+    @GetMapping("/error")
+    public String getErrorPage(){
+        return "error/500";
     }
 
 }
