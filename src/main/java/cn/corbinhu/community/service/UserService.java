@@ -202,10 +202,9 @@ public class UserService implements CommunityConstant {
     public void logout(String ticket) {
         //loginTicketMapper.updateStatus(ticket, TICKET_INVALID_STATUS);
         String loginTicketKey = RedisKeyUtil.getTicketKey(ticket);
-        LoginTicket loginTicket = (LoginTicket) redisTemplate.opsForValue().get("loginTicketKey");
+        LoginTicket loginTicket = (LoginTicket) redisTemplate.opsForValue().get(loginTicketKey);
         loginTicket.setStatus(TICKET_INVALID_STATUS);
         redisTemplate.opsForValue().set(loginTicketKey, loginTicket);
-
     }
 
     // 根据ticket查询登录凭证

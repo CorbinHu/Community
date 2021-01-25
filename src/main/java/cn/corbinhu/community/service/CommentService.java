@@ -36,6 +36,7 @@ public class CommentService implements CommunityConstant {
 
     /**
      * 查询某个类型的帖子
+     *
      * @param entityType
      * @param entityId
      * @return
@@ -46,6 +47,7 @@ public class CommentService implements CommunityConstant {
 
     /**
      * 添加评论（回帖）
+     *
      * @param comment
      */
     @Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
@@ -63,5 +65,9 @@ public class CommentService implements CommunityConstant {
             int count = commentMapper.selectCommentCountByEntity(comment.getEntityType(), comment.getEntityId());
             discussPostService.updatePostCommentCount(comment.getEntityId(), count);
         }
+    }
+
+    public Comment findCommentById(int id) {
+        return commentMapper.selectCommentById(id);
     }
 }

@@ -1,6 +1,5 @@
 package cn.corbinhu.community.Controller;
 
-import cn.corbinhu.community.Controller.annotation.LoginRequired;
 import cn.corbinhu.community.entity.Comment;
 import cn.corbinhu.community.entity.DiscussPost;
 import cn.corbinhu.community.entity.Page;

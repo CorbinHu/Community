@@ -36,6 +36,10 @@ public class ServiceLogAspect {
     public void before(JoinPoint joinPoint) {
         // 获取访问用户IP
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+        // 通过Controller调用service 就会有请求产生，但消费者中也调用了service ，没有请求产生，可能会空
+        if (attributes == null){
+            return;
+        }
         HttpServletRequest request = attributes.getRequest();
         String ip = request.getRemoteHost();
         // 获取用户访问的服务
